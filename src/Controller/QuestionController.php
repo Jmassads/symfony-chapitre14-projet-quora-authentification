@@ -18,7 +18,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class QuestionController extends AbstractController
 {
     #[Route('/question/ask', name: 'question_form')]
-    #[IsGranted('IS_AUTHENTICATED_FULLY')]
+    #[IsGranted('IS_AUTHENTICATED_REMEMBERED')]
     public function index(Request $request, EntityManagerInterface $em): Response
     {
         $user = $this->getUser();
@@ -70,7 +70,7 @@ class QuestionController extends AbstractController
     }
 
     #[Route('/question/rating/{id}/{score}', name: 'question_rating')]
-    #[IsGranted('IS_AUTHENTICATED_FULLY')]
+    #[IsGranted('IS_AUTHENTICATED_REMEMBERED')]
     public function ratingQuestion(Request $request, Question $question, VoteRepository $voteRepo, int $score, EntityManagerInterface $em)
     {
         $user = $this->getUser();
@@ -102,7 +102,7 @@ class QuestionController extends AbstractController
     }
 
     #[Route('/comment/rating/{id}/{score}', name: 'comment_rating')]
-    #[IsGranted('IS_AUTHENTICATED_FULLY')]
+    #[IsGranted('IS_AUTHENTICATED_REMEMBERED')]
     public function ratingComment(Request $request, Comment $comment, VoteRepository $voteRepo, int $score, EntityManagerInterface $em)
     {
         $user = $this->getUser();
